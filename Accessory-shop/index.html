@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Accessory Quotation</title>
+    <meta name="description" content="Company quotation">
+    <meta name="author" content="SitePoint">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2>Car Accessory Shop</h2>
+                <p>
+                    Bangsaothong
+                    <br>Samutrprakarn
+                    <br>THAILAND
+                    <br>30000
+                    <br>
+
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                    : 12345678
+
+                    <br>
+                    <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                    : 12345678
+            </div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-3 text-center">
+                <h1>
+                    LINM
+                </h1>
+                <img src="img\car-logo.png" style="width:150px;height:100px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Customer:</h3>
+                <b>Tharaphi Lwin</b><br>
+                Queen of Sheba Residence<br>
+                Assumption University<br>
+                Thailand
+            </div>
+            <br>
+            <div class="col-sm-4">
+                <h3>Ship to:</h3>
+                <b>Tharaphi Lwin</b><br>
+                Queen of Sheba Residence<br>
+                Assumption University<br>
+                Thailand
+
+            </div>
+
+            <div class="col-sm-4">
+                <h4 id="quotationDate">
+                    2010/7/27
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <button type=" button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Item
+    </button>
+
+    <table class=" table table-striped table-bordered table-condensed" id="quotationTable">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+        <tfoot>
+            <tr id="sub-total">
+                <td colspan="3" class="text-right"> Gross Price</td>
+                <td colspan="1" class="text-right" id="subTotal">---</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right"> VAT Amount</td>
+                <td colspan="1" class="text-right" id="vat">--</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right"> Total Amount</td>
+                <td colspan="1" class="text-right" id="total">0.00</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <br>
+
+    <p class="cen">
+        <b>Make all checks payable to: 418-1566-139 (KMA)</b>
+        <br><i>Linm Car Accessory Shop</i>
+        <br><b>If you have any question concerning this invoices, call: 0989204783</b>
+        <br>
+        <br><b>THANK YOU FOR YOUR BUSINESS</b>
+    </p>
+
+
+    <footer>Sales Manager</footer>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Add Item</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <label for="accessory">Select an accessory:</label>
+                            </td>
+                            <td><select id="newItem">
+                                    <option value="Car Cover">Car Cover</option>
+                                    <option value="Floor Mats">Floor Mats</option>
+                                    <option value="Seat Covers">Seat Covers</option>
+                                    <option value="Phone Holder">Phone Holder</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="price">Price Per Unit</label> </td>
+                            <td><input type="number" min="0" id="newItemPPU"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="quantity">Quantity:</label>
+                            </td>
+                            <td><input type="number" id="newItemQty" min="1" value="1">
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addItem()">Save New
+                        Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            const prices = {
+                "Car Cover": 100, // Car Cover
+                "Floor Mats": 200, // Floor Mats
+                "Seat Covers": 30,  // Seat Covers
+                "Phone Holder": 40   // Phone Holder
+            };
+
+            $('#newItem').change(function () {
+                const selectedValue = $(this).val();
+                $('#newItemPPU').val(prices[selectedValue] || 0);
+            });
+
+            // Set initial value
+            $('#newItem').trigger('change');
+        });
+
+        var quoationData = []
+
+        function addItem() {
+            var d = $("#newItem").val()
+            var u = $("#newItemPPU").val()
+            var q = $("#newItemQty").val()
+            console.debug(d, u, q)
+            quoationData.push({
+                description: d,
+                quantity: Number.parseFloat(q),
+                unitPrice: Number.parseFloat(u)
+            })
+            $('#exampleModal').modal('hide')
+            renderTable()
+        }
+
+        function renderTable() {
+            var data = quoationData
+            var subTotal = 0
+            data.forEach((e) => {
+                subTotal = subTotal + (e.unitPrice * e.quantity)
+            })
+            var vat = (subTotal * .07).toFixed(2)
+            var total = (subTotal * 1.07).toFixed(2)
+
+            console.log('subTotal', subTotal)
+            $("#subTotal").html("" + subTotal)
+            $("#vat").html("" + vat)
+            $("#total").html("" + total)
+
+            var dataRows = data.map((e, i) => {
+                let amount = e.quantity * e.unitPrice
+                return `<tr class="data-row">
+                            <td class="text-center">${e.quantity}</td>
+                            <td class="data">
+                                <button onclick="deleteItem(${i})">X</button>
+                                ${e.description}
+                            </td>
+                            <td class="text-right">${e.unitPrice.toFixed(2)}</td>
+                            <td class="text-right">${amount.toFixed(2)}</td>
+                        </tr>`;
+            })
+
+            $(".data-row").remove()
+
+            // Insert into the table
+            dataRows.forEach((r) => {
+                $('#quotationTable tbody').before(r)
+            })
+
+        }
+
+        function deleteItem(i) {
+            quoationData.splice(i, 1)
+            renderTable()
+        }
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
