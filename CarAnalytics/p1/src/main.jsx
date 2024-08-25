@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <CarDetails cars={carData.Cars} />, // Pass car data to CarDetails
     errorElement: <ErrorPage />,
   },
-] ,{ basename: "/CarAnalytics" });
+] ,{ basename: "/CarAnalytics/p1" });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
